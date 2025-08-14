@@ -76,3 +76,25 @@ func getIntersectionNode(headA, headB *ListNode) *ListNode {
 	}
 	return pA
 }
+
+func removeNthFromEnd(head *ListNode, n int) *ListNode {
+	dummy := &ListNode{Next: head} // фиктивный узел перед головой
+	first := dummy
+	second := dummy
+
+	// Сдвигаем first на n+1 шаг вперед
+	for i := 0; i <= n; i++ {
+		first = first.Next
+	}
+
+	// Двигаем оба указателя до конца
+	for first != nil {
+		first = first.Next
+		second = second.Next
+	}
+
+	// second.Next — узел который нужно удалить
+	second.Next = second.Next.Next
+
+	return dummy.Next
+}
